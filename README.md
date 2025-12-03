@@ -9,8 +9,8 @@ A beautiful, modern Flutter application for yoga and wellness enthusiasts. Featu
 ## 📱 Screenshots
 
 <p align="center">
-  <img src="screenshots/home_screen.png" width="250" alt="Home Screen"/>
-  <img src="screenshots/activity_screen.png" width="250" alt="Activity Screen"/>
+  <img src="Home Screen.png" width="250" alt="Home Screen"/>
+  <img src="Activity Screen.png" width="250" alt="Activity Screen"/>
 </p>
 
 ## ✨ Features
