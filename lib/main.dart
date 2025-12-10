@@ -1,50 +1,34 @@
-// ============================================================================
-// COMPLETE FLUTTER YOGA HOME SCREEN APPLICATION
-// ============================================================================
-
-// ============================================================================
-// FILE: pubspec.yaml
-// ============================================================================
-/*
-name: yoga_home
-description: A Yoga Home Screen Flutter application
-publish_to: 'none'
-version: 1.0.0+1
-
-environment:
-  sdk: '>=3.0.0 <4.0.0'
-
-dependencies:
-  flutter:
-    sdk: flutter
-  http: ^1.1.0
-  google_fonts: ^6.1.0
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
-
-flutter:
-  uses-material-design: true
-*/
-
-// ============================================================================
-// FILE: lib/main.dart
-// ============================================================================
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'screens/home_screen.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:untitled1/screens/onboarding_flow.dart';
+import 'package:untitled1/screens/phone_auth.dart';
+import 'package:untitled1/screens/register_screen.dart';
+
+// screens (adjust paths if your files are located elsewhere)
+import 'package:untitled1/screens/splash_screen.dart';
+//import 'package:untitled1/screens/onboarding_screen.dart';
+import 'package:untitled1/screens/login_options_screen.dart';
+//import 'package:untitled1/screens/login_screen.dart';
+//import 'package:untitled1/screens/signup_screen.dart';
 import 'package:untitled1/screens/home_screen.dart';
+import 'package:untitled1/test.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const YogaApp());
 }
 
 class YogaApp extends StatelessWidget {
   const YogaApp({Key? key}) : super(key: key);
+
+  // centralize route names so you won't use raw strings throughout app
+  static const routeSplash = '/splash';
+  static const routeOnboarding = '/onboarding';
+  static const routeLoginOptions = '/login-options';
+  static const routeLogin = '/login';
+  static const routeSignup = '/signup';
+  static const routeHome = '/home';
 
   @override
   Widget build(BuildContext context) {
@@ -60,46 +44,30 @@ class YogaApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(),
         scaffoldBackgroundColor: const Color(0xFFF5F5F5),
       ),
-      home: const HomeScreen(),
+
+      // start with splash which will decide where to navigate next
+      initialRoute: routeSplash,
+
+      // named routes map
+      routes: {
+        routeSplash: (context) => const SplashScreen(),
+        '/testvideo': (context) => const VideoPlayerScreen(),
+       // routeOnboarding: (context) => const OnboardingScreen(),
+        routeLoginOptions: (context) => const LoginOptionsScreen(),
+       // routeLogin: (context) => const LoginScreen(),
+       // routeSignup: (context) => const SignupScreen(),
+        routeHome: (context) => const HomeScreen(),
+        '/phone-auth': (c) => const PhoneAuthScreen(),
+        '/signup': (c) => const RegisterScreen(),
+        '/onboarding': (c) => const OnboardingFlow(),
+      },
+
+      // fallback route
+      onUnknownRoute: (settings) => MaterialPageRoute(builder: (_) =>
+      const
+      SplashScreen()
+          //HomeScreen()
+      ),
     );
   }
 }
-
-// ============================================================================
-// FILE: lib/models/home_response.dart
-// ============================================================================
-
-
-// ============================================================================
-// FILE: lib/services/api_service.dart
-// ============================================================================
-
-
-// ============================================================================
-// FILE: lib/screens/home_screen.dart
-// ============================================================================
-
-
-// ============================================================================
-// FILE: lib/widgets/header_section.dart
-// ============================================================================
-
-
-// ============================================================================
-// FILE: lib/widgets/continue_watching_carousel.dart
-// ============================================================================
-
-
-// ============================================================================
-// FILE: lib/widgets/yoga_category_grid.dart
-// ============================================================================
-
-
-// ============================================================================
-// FILE: lib/widgets/popular_videos_list.dart
-// ============================================================================
-
-
-// ============================================================================
-// FILE: lib/widgets/bottom_nav_bar.dart
-// ============================================================================

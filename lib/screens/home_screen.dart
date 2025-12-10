@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:untitled1/screens/profile_screen.dart';
+import 'package:untitled1/screens/subscription_modals.dart';
 import '../main.dart';
 import '../models/home_response.dart';
 import '../services/api_service.dart';
@@ -7,6 +9,7 @@ import '../widgets/continue_watching_carousel.dart';
 import '../widgets/yoga_category_grid.dart';
 import '../widgets/popular_videos_list.dart';
 import '../widgets/bottom_nav_bar.dart';
+import 'ClassesPage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,6 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _homeDataFuture = ApiService.fetchHomeData('randomstring');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showSubscriptionIfNeeded(context);
+    });
   }
 
   Widget _buildHomeContent(HomeResponse data) {
@@ -122,7 +128,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // Show different content based on selected tab
           if (_currentIndex == 1) {
-            return _buildActivityContent(data);
+            return ClassesPage();
+          }
+          if (_currentIndex == 3) {
+            return ProfileScreen();
           }
 
           return _buildHomeContent(data);
